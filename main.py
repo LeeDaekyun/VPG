@@ -7,7 +7,7 @@ def main():
     env = gym.make('CartPole-v1')
     env.seed(1)
     torch.manual_seed(1)
-    episodes = 1000
+    episodes = 10000
     running_reward = 10
     gamma = 0.99
     learning_rate = 0.01
@@ -18,7 +18,7 @@ def main():
         state = env.reset()  # Reset environment and record the starting state
         done = False
 
-        for time in range(10000):
+        for time in range(1000):
             if episode % 50 == 0:
                 env.render()
             action = agent.select_action(state)
