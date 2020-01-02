@@ -18,7 +18,9 @@ def main():
         state = env.reset()  # Reset environment and record the starting state
         done = False
 
-        for time in range(1000):
+        for time in range(10000):
+            if episode % 50 == 0:
+                env.render()
             action = agent.select_action(state)
             # Step through environment using chosen action
             state, reward, done, _ = env.step(action)

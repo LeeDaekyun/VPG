@@ -25,7 +25,7 @@ class VPG(object):
         action = c.sample()
 
         # Add log probability of our chosen action to our history
-        self.policy_history = torch.stack([self.policy_history, c.log_prob(action)])
+        self.policy_history = torch.cat([self.policy_history, c.log_prob(action).view(-1)])
         return int(action)
 
     def update_policy(self):
@@ -50,7 +50,7 @@ class VPG(object):
         self.optimizer.step()
 
         # Save and intialize episode history counters
-        self.loss_history.append(loss.data[0])
+        self.loss_history.append(loss.data)
         self.reward_history.append(np.sum(self.reward_episode))
         self.policy_history = Variable(torch.Tensor())
         self.reward_episode = []
